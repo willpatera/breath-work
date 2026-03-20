@@ -3,6 +3,13 @@ import type { Practice } from '../library/practiceTypes'
 import type { PlayerState } from './playerTypes'
 import { buildTimeline, totalDuration } from './timelineBuilder'
 import { audioEngine } from '../audio/audioEngine'
+import {
+  setMediaSession,
+  setMediaSessionHandlers,
+  setPlaybackState,
+  setPositionState,
+  clearMediaSession,
+} from '../pwa/mediaSession'
 
 interface PlayerActions {
   load: (practice: Practice) => void
@@ -53,13 +60,31 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
 
     set({ status: 'playing' })
 
+    // Audio keep-alive (prevents iOS from suspending AudioContext)
+    audioEngine.startKeepAlive()
+
     // Start audio for current step
     const step = state.timeline[state.currentStepIndex]
     if (step) {
       audioEngine.playStep(step, step.duration - state.stepElapsed)
     }
 
-    startLoop()
+    // Media Session
+    if (state.practiceTitle) {
+      setMediaSession(state.practiceTitle)
+    }
+    setMediaSessionHandlers({
+      onPlay: () => get().play(),
+      onPause: () => get().pause(),
+      onStop: () => get().reset(),
+    })
+    setPlaybackState('playing')
+    setPositionState(state.totalDuration, state.totalElapsed)
+
+    // Wake Lock
+    acquireWakeLock()
+
+    startWorkerLoop()
   },
 
   pause: () => {
@@ -67,13 +92,19 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     if (state.status !== 'playing') return
     set({ status: 'paused' })
     audioEngine.stop()
-    stopLoop()
+    audioEngine.stopKeepAlive()
+    setPlaybackState('paused')
+    releaseWakeLock()
+    stopWorkerLoop()
   },
 
   reset: () => {
     const state = get()
     audioEngine.stop()
-    stopLoop()
+    audioEngine.stopKeepAlive()
+    clearMediaSession()
+    releaseWakeLock()
+    stopWorkerLoop()
     const total = totalDuration(state.timeline)
     set({
       status: 'idle',
@@ -92,9 +123,11 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     const delta = now - lastTickTime
     lastTickTime = now
 
-    if (delta <= 0 || delta > 1000) return // skip huge gaps
+    // Skip negative or zero deltas, but ALLOW large gaps for catch-up
+    if (delta <= 0) return
 
-    const deltaSeconds = delta / 1000
+    // Clamp to 30s max to avoid unbounded jumps (e.g. after sleep)
+    const deltaSeconds = Math.min(delta / 1000, 30)
     let { currentStepIndex, stepElapsed, totalElapsed } = state
     const { timeline, totalDuration: total } = state
 
@@ -119,7 +152,10 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     // Check if finished
     if (currentStepIndex >= timeline.length) {
       audioEngine.playCompletion()
-      stopLoop()
+      audioEngine.stopKeepAlive()
+      clearMediaSession()
+      releaseWakeLock()
+      stopWorkerLoop()
       set({
         status: 'finished',
         currentStepIndex: timeline.length - 1,
@@ -135,6 +171,9 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     const stepRem = Math.max(0, step.duration - stepElapsed)
     const totalRem = Math.max(0, total - totalElapsed)
 
+    // Update Media Session position periodically
+    setPositionState(total, totalElapsed)
+
     set({
       currentStepIndex,
       stepElapsed,
@@ -145,27 +184,70 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
   },
 }))
 
-// ─── rAF loop ───
+// ─── Web Worker tick loop (survives backgrounding) ───
 
-let animFrameId: number | null = null
+let worker: Worker | null = null
 let lastTickTime = 0
 
-function onFrame(now: number): void {
-  usePlayerStore.getState().tick(now)
-  if (usePlayerStore.getState().status === 'playing') {
-    animFrameId = requestAnimationFrame(onFrame)
-  }
+function onWorkerTick(): void {
+  usePlayerStore.getState().tick(performance.now())
 }
 
-function startLoop(): void {
-  stopLoop()
+function startWorkerLoop(): void {
+  stopWorkerLoop()
   lastTickTime = performance.now()
-  animFrameId = requestAnimationFrame(onFrame)
+
+  worker = new Worker(new URL('./tickWorker.ts', import.meta.url), {
+    type: 'module',
+  })
+  worker.onmessage = onWorkerTick
+  worker.postMessage('start')
 }
 
-function stopLoop(): void {
-  if (animFrameId !== null) {
-    cancelAnimationFrame(animFrameId)
-    animFrameId = null
+function stopWorkerLoop(): void {
+  if (worker) {
+    worker.postMessage('stop')
+    worker.terminate()
+    worker = null
   }
+}
+
+// ─── Screen Wake Lock ───
+
+let wakeLock: WakeLockSentinel | null = null
+
+async function acquireWakeLock(): Promise<void> {
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLock = await navigator.wakeLock.request('screen')
+      wakeLock.addEventListener('release', () => {
+        wakeLock = null
+      })
+    }
+  } catch {
+    // Wake Lock not supported or denied — non-fatal
+  }
+}
+
+function releaseWakeLock(): void {
+  if (wakeLock) {
+    wakeLock.release()
+    wakeLock = null
+  }
+}
+
+// ─── Visibility change recovery ───
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return
+    const state = usePlayerStore.getState()
+    if (state.status !== 'playing') return
+
+    // Re-acquire wake lock (released by OS when backgrounded)
+    acquireWakeLock()
+
+    // Resume AudioContext if suspended
+    audioEngine.resumeContext()
+  })
 }
