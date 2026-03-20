@@ -1,0 +1,19 @@
+{
+  "id": "debug",
+  "title": "Debug",
+  "author": "Dev",
+  "description": "Simple debug pattern: 8s inhale, 20s hold with cues at 10s and 3-2-1, 8s exhale, 20s hold with cues at 10s and 3-2-1. 8 rounds.",
+  "steps": [
+    {
+      "type": "repeat",
+      "label": "Debug cycle",
+      "rounds": 8,
+      "sequence": [
+        { "type": "inhale", "duration": 8.0 },
+        { "type": "hold_in", "duration": 20.0, "cues": { "countdown": [10, 3, 2, 1] } },
+        { "type": "exhale", "duration": 8.0 },
+        { "type": "hold_out", "duration": 20.0, "cues": { "countdown": [10, 3, 2, 1] } }
+      ]
+    }
+  ]
+}

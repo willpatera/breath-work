@@ -1,0 +1,482 @@
+/* ─── Screens ─── */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+/* ─── Library screen ─── */
+
+.screen--library {
+  padding: 3rem 1.5rem 2rem;
+}
+
+.library-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.library-header__title {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.library-header__subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.practice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── Practice card ─── */
+
+.practice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.25rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: background 0.15s;
+  width: 100%;
+}
+
+.practice-card:active {
+  background: #222;
+}
+
+.practice-card__title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.practice-card__meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.practice-card__dot {
+  opacity: 0.4;
+}
+
+.practice-card__desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* ─── Player screen ─── */
+
+.screen--player {
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+/* ─── Session header ─── */
+
+.session-header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.session-header__title {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.session-header__phase {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  min-height: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.session-header__timer {
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.session-header__meta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 0.25rem;
+}
+
+.session-header__next {
+  color: var(--text-secondary);
+}
+
+.session-header__total {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ─── Orb ─── */
+
+.orb-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.orb {
+  width: min(60vw, 240px);
+  height: min(60vw, 240px);
+  position: relative;
+  transform: scale(0.35);
+  will-change: transform;
+}
+
+.orb__glow {
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(100, 183, 250, 0.15) 0%,
+    rgba(241, 100, 232, 0.08) 50%,
+    transparent 70%
+  );
+}
+
+.orb__core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    #64B7FA 0%,
+    #F164E8 60%,
+    #FEB8BA 100%
+  );
+  box-shadow:
+    0 0 40px rgba(100, 183, 250, 0.2),
+    0 0 80px rgba(241, 100, 232, 0.1),
+    inset 0 -8px 20px rgba(254, 184, 186, 0.15),
+    inset 0 4px 12px rgba(100, 183, 250, 0.2);
+}
+
+/* ─── Player controls ─── */
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  padding: 1rem 0;
+}
+
+.player-controls__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.player-controls__btn--primary {
+  width: 64px;
+  height: 64px;
+  font-size: 1.5rem;
+  background: #64B7FA;
+  color: #000;
+}
+
+.player-controls__btn--primary:active {
+  background: #4da3e8;
+}
+
+.player-controls__btn--secondary {
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.player-controls__btn--secondary:active {
+  background: #222;
+}
+
+.player-controls__btn--muted {
+  opacity: 0.4;
+}
+
+.player-controls__btn--back {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 50%;
+}
+
+/* ─── Settings sheet ─── */
+
+.settings-sheet__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.settings-sheet__panel {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border);
+  border-radius: 16px 16px 0 0;
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.settings-sheet__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.settings-sheet__header h2 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.settings-sheet__header button {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.settings-sheet__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 0;
+}
+
+.settings-sheet__row + .settings-sheet__row {
+  border-top: 1px solid var(--border);
+}
+
+.settings-sheet__label {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.settings-sheet__toggle {
+  position: relative;
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  background: #333;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.settings-sheet__toggle--on {
+  background: var(--accent);
+}
+
+.settings-sheet__toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+  pointer-events: none;
+}
+
+.settings-sheet__toggle--on .settings-sheet__toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* ─── Info drawer ─── */
+
+.info-drawer__trigger {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  z-index: 10;
+}
+
+.info-drawer__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.info-drawer__panel {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border);
+  border-radius: 16px 16px 0 0;
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.info-drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-drawer__header h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.info-drawer__header button {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.info-drawer__body {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── Completion screen ─── */
+
+.screen--complete {
+  justify-content: center;
+  align-items: center;
+}
+
+.complete {
+  text-align: center;
+  padding: 2rem;
+}
+
+.complete__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #000;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.complete__title {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.complete__btn {
+  padding: 0.875rem 2rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: background 0.15s;
+}
+
+.complete__btn:active {
+  background: #222;
+}
+
+/* ─── Info drawer step breakdown ─── */
+
+.info-drawer__steps {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.info-drawer__block {
+  padding: 0.5rem 0;
+}
+
+.info-drawer__block + .info-drawer__block {
+  border-top: 1px solid var(--border);
+}
+
+.info-drawer__repeat-header {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.info-drawer__sequence {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+}
+
+.info-drawer__step {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 0.2rem 0;
+  font-variant-numeric: tabular-nums;
+}

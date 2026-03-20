@@ -1,0 +1,79 @@
+{
+  "id": "vortex",
+  "title": "Vortex",
+  "author": "Nick",
+  "description": "Breathwork sequence with multiple phases, fast/slow breathing, and holds.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Intro",
+      "text": "Normal breathing",
+      "duration": 10.0
+    },
+    {
+      "type": "repeat",
+      "label": "4 in / 2 out",
+      "rounds": 17,
+      "sequence": [
+        { "type": "inhale", "duration": 4.0 },
+        { "type": "exhale", "duration": 2.0 }
+      ]
+    },
+    { "type": "hold_out", "duration": 45.0, "cues": { "countdown": [10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 5.0 },
+    { "type": "hold_in", "duration": 6.0 },
+    { "type": "exhale", "duration": 5.0 },
+    {
+      "type": "repeat",
+      "label": "4 in / 4 out",
+      "rounds": 13,
+      "sequence": [
+        { "type": "inhale", "duration": 4.0 },
+        { "type": "exhale", "duration": 4.0 }
+      ]
+    },
+    {
+      "type": "repeat",
+      "label": "Fast breathing",
+      "rounds": 45,
+      "sequence": [
+        { "type": "inhale", "duration": 1.5 },
+        { "type": "exhale", "duration": 1.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 90.0, "cues": { "countdown": [10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 4.0 },
+    { "type": "exhale", "duration": 4.0 },
+    { "type": "hold_out", "duration": 30.0, "cues": { "countdown": [10, 3, 2, 1] } },
+    {
+      "type": "repeat",
+      "label": "5.5 in / 5.5 out",
+      "rounds": 14,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    },
+    { "type": "inhale", "duration": 21.0 },
+    { "type": "exhale", "duration": 21.0 },
+    { "type": "inhale", "duration": 13.0 },
+    { "type": "exhale", "duration": 13.0 },
+    { "type": "inhale", "duration": 8.0 },
+    { "type": "exhale", "duration": 8.0 },
+    { "type": "inhale", "duration": 5.0 },
+    { "type": "exhale", "duration": 5.0 },
+    { "type": "inhale", "duration": 3.0 },
+    { "type": "exhale", "duration": 3.0 },
+    { "type": "inhale", "duration": 2.0 },
+    { "type": "exhale", "duration": 2.0 },
+    { "type": "inhale", "duration": 1.0 },
+    { "type": "exhale", "duration": 1.0 },
+    { "type": "hold_out", "duration": 21.0, "cues": { "countdown": [10, 3, 2, 1] } },
+    {
+      "type": "instruction",
+      "label": "Outro",
+      "text": "Normal breathing",
+      "duration": 20.0
+    }
+  ]
+}
