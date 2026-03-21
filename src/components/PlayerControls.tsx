@@ -73,7 +73,7 @@ export function PlayerControls() {
           onClick={handlePlayPause}
           aria-label={status === 'playing' ? 'Pause' : 'Play'}
         >
-          {status === 'playing' ? <IconPause size={32} /> : <IconPlay size={32} />}
+          {status === 'playing' ? <IconPause size={36} /> : <IconPlay size={36} />}
         </button>
 
         <button

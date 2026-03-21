@@ -34,7 +34,7 @@ export function SessionHeader() {
       )}
 
       <div className="session-header__timer">
-        {formatSeconds(stepRemaining)}
+        {formatSeconds(stepRemaining, step.duration)}
       </div>
 
       <div className="session-header__meta">
