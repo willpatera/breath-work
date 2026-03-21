@@ -11,7 +11,7 @@ export default defineConfig({
       includeAssets: ['favicon.svg'],
       manifest: {
         name: 'Breath Work',
-        short_name: 'BreathWork',
+        short_name: 'Breath Work',
         description: 'Guided breathing practices',
         theme_color: '#000000',
         background_color: '#000000',
@@ -21,10 +21,20 @@ export default defineConfig({
         start_url: '/breath-work/',
         icons: [
           {
-            src: 'favicon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml',
-            purpose: 'any maskable',
+            src: 'pwa-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },

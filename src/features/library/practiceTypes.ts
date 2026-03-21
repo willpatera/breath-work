@@ -20,24 +20,32 @@ export interface InstructionStep {
 
 export interface InhaleStep {
   type: 'inhale'
+  label?: string
+  text?: string
   duration: number
   cues?: Cues
 }
 
 export interface ExhaleStep {
   type: 'exhale'
+  label?: string
+  text?: string
   duration: number
   cues?: Cues
 }
 
 export interface HoldInStep {
   type: 'hold_in'
+  label?: string
+  text?: string
   duration: number
   cues?: Cues
 }
 
 export interface HoldOutStep {
   type: 'hold_out'
+  label?: string
+  text?: string
   duration: number
   cues?: Cues
 }

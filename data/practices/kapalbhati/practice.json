@@ -1,0 +1,24 @@
+{
+  "id": "kapalbhati",
+  "title": "Kapalbhati",
+  "author": "Yoga",
+  "description": "Kapalbhati Pranayama — skull-shining breath. Inhale deeply using your diaphragm to expand the chest and abdomen, then rapidly draw the abdomen back to expel the air. The exhale is active; the inhale is passive.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Prepare",
+      "text": "Sit tall, hands on knees. Breathe normally.",
+      "duration": 10.0
+    },
+    {
+      "type": "repeat",
+      "label": "Kapalbhati cycle",
+      "rounds": 8,
+      "sequence": [
+        { "type": "inhale", "duration": 8.0 },
+        { "type": "exhale", "duration": 4.0 },
+        { "type": "hold_out", "duration": 12.0, "cues": { "countdown": [3, 2, 1] } }
+      ]
+    }
+  ]
+}

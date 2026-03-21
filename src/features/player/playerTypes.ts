@@ -8,6 +8,7 @@ export interface RuntimeStep {
   duration: number
   label: string
   phase: string
+  text: string | null
   roundIndex: number | null
   roundTotal: number | null
   cues: Cues | null

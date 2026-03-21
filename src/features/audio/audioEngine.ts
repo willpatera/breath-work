@@ -22,6 +22,7 @@ class AudioEngine {
   private currentCue: CueHandle | null = null
   private _cuesEnabled = true
   private _binauralEnabled = false
+  private _synthEnabled = true
   private keepAliveAudio: HTMLAudioElement | null = null
 
   init(): AudioContext {
@@ -54,6 +55,18 @@ class AudioEngine {
     this._binauralEnabled = enabled
   }
 
+  get synthEnabled(): boolean {
+    return this._synthEnabled
+  }
+
+  setSynthEnabled(enabled: boolean): void {
+    this._synthEnabled = enabled
+    if (!enabled && this.currentSynth) {
+      this.currentSynth.stop()
+      this.currentSynth = null
+    }
+  }
+
   playStep(step: RuntimeStep, remainingDuration?: number): void {
     this.stopCurrent()
 
@@ -64,10 +77,12 @@ class AudioEngine {
       : 0
 
     // Play tone for breath steps
-    if (step.actionType === 'inhale') {
-      this.currentSynth = playInhale(ctx, duration, elapsed, this._binauralEnabled)
-    } else if (step.actionType === 'exhale') {
-      this.currentSynth = playExhale(ctx, duration, elapsed, this._binauralEnabled)
+    if (this._synthEnabled) {
+      if (step.actionType === 'inhale') {
+        this.currentSynth = playInhale(ctx, duration, elapsed, this._binauralEnabled)
+      } else if (step.actionType === 'exhale') {
+        this.currentSynth = playExhale(ctx, duration, elapsed, this._binauralEnabled)
+      }
     }
     // hold_in, hold_out, instruction = silence (no synth)
 

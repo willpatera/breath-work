@@ -1,0 +1,32 @@
+{
+  "id": "nadi-shodhana",
+  "title": "Nadi Shodhana",
+  "author": "Yoga",
+  "description": "Alternate nostril breathing (Nadi Shodhana Pranayama). Bring your right hand to your nose and form Vishnu Mudra: fold your index and middle fingers toward your palm, keeping your thumb, ring finger, and little finger extended. 8-second rhythm.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Prepare",
+      "text": "Form Vishnu Mudra with your right hand. Both nostrils pulled open.",
+      "duration": 10.0,
+      "cues": { "countdown": [3, 2, 1] }
+    },
+    { "type": "inhale", "duration": 8.0, "text": "Both nostrils pulled open with ring finger and thumb" },
+    { "type": "exhale", "duration": 8.0, "text": "Both nostrils pulled open with ring finger and thumb" },
+    {
+      "type": "repeat",
+      "label": "Nadi Shodhana cycle",
+      "rounds": 8,
+      "sequence": [
+        { "type": "inhale", "duration": 8.0, "text": "Right nostril only — close left with ring finger" },
+        { "type": "hold_in", "duration": 8.0, "text": "Both nostrils closed", "cues": { "countdown": [3, 2, 1] } },
+        { "type": "exhale", "duration": 8.0, "text": "Left nostril only — close right with thumb" },
+        { "type": "inhale", "duration": 8.0, "text": "Left nostril only — close left with ring finger" },
+        { "type": "hold_in", "duration": 8.0, "text": "Both nostrils closed", "cues": { "countdown": [3, 2, 1] } },
+        { "type": "exhale", "duration": 8.0, "text": "Right nostril only — close left with ring finger" }  
+    ]
+    },
+    { "type": "inhale", "duration": 8.0, "text": "Both nostrils pulled open with ring finger and thumb" },
+    { "type": "exhale", "duration": 8.0, "text": "Both nostrils pulled open with ring finger and thumb" }
+  ]
+}

@@ -61,7 +61,10 @@ function flattenSteps(steps: AuthoredStep[]): RuntimeStep[] {
     actionType: e.actionType,
     duration: e.duration,
     label: e.label,
-    phase: e.text ?? ACTION_LABELS[e.actionType] ?? e.label,
+    phase: e.actionType === 'instruction'
+      ? (e.label || 'Instruction')
+      : (e.label || ACTION_LABELS[e.actionType]),
+    text: e.text ?? null,
     roundIndex: e.roundIndex,
     roundTotal: e.roundTotal,
     cues: e.cues,
@@ -80,11 +83,8 @@ function breathStepToEntry(
   return {
     actionType: step.type,
     duration: step.duration,
-    label:
-      step.type === 'instruction'
-        ? step.label
-        : ACTION_LABELS[step.type],
-    text: step.type === 'instruction' ? step.text : undefined,
+    label: 'label' in step && step.label ? step.label : ACTION_LABELS[step.type],
+    text: 'text' in step ? step.text : undefined,
     roundIndex,
     roundTotal,
     cues: 'cues' in step && step.cues ? step.cues : null,

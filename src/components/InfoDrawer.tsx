@@ -18,12 +18,13 @@ function formatStepLabel(step: BreathStep): string {
   if (step.type === 'instruction') {
     return `${step.label}: ${step.duration}s`
   }
-  const label = ACTION_LABELS[step.type] ?? step.type
+  const label = 'label' in step && step.label ? step.label : (ACTION_LABELS[step.type] ?? step.type)
+  const textNote = 'text' in step && step.text ? ` — ${step.text}` : ''
   const cueNote =
     'cues' in step && step.cues?.countdown
       ? ` (cues: ${step.cues.countdown.join(', ')})`
       : ''
-  return `${label}: ${step.duration}s${cueNote}`
+  return `${label}: ${step.duration}s${textNote}${cueNote}`
 }
 
 function renderStep(step: AuthoredStep, index: number) {

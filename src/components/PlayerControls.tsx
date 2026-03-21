@@ -4,11 +4,7 @@ import { loadBool, saveBool } from '../lib/storage'
 import { useState } from 'react'
 import { IconRestart, IconPlay, IconPause, IconSettings, IconClose } from './Icons'
 
-interface PlayerControlsProps {
-  onReturn: () => void
-}
-
-export function PlayerControls({ onReturn }: PlayerControlsProps) {
+export function PlayerControls() {
   const status = usePlayerStore((s) => s.status)
   const play = usePlayerStore((s) => s.play)
   const pause = usePlayerStore((s) => s.pause)
@@ -18,6 +14,11 @@ export function PlayerControls({ onReturn }: PlayerControlsProps) {
   const [binauralOn, setBinauralOn] = useState(() => {
     const v = loadBool('binaural', false)
     audioEngine.setBinauralEnabled(v)
+    return v
+  })
+  const [synthOn, setSynthOn] = useState(() => {
+    const v = loadBool('synth', true)
+    audioEngine.setSynthEnabled(v)
     return v
   })
 
@@ -33,6 +34,13 @@ export function PlayerControls({ onReturn }: PlayerControlsProps) {
     setBinauralOn(next)
     saveBool('binaural', next)
     audioEngine.setBinauralEnabled(next)
+  }
+
+  const handleSynthToggle = () => {
+    const next = !synthOn
+    setSynthOn(next)
+    saveBool('synth', next)
+    audioEngine.setSynthEnabled(next)
   }
 
   const handlePlayPause = () => {
@@ -75,17 +83,6 @@ export function PlayerControls({ onReturn }: PlayerControlsProps) {
         >
           <IconSettings size={22} />
         </button>
-
-        <button
-          className="player-controls__btn player-controls__btn--secondary player-controls__btn--back"
-          onClick={() => {
-            reset()
-            onReturn()
-          }}
-          aria-label="Back to library"
-        >
-          <IconClose size={22} />
-        </button>
       </div>
 
       {settingsOpen && (
@@ -127,6 +124,20 @@ export function PlayerControls({ onReturn }: PlayerControlsProps) {
                 onClick={handleBinauralToggle}
                 role="switch"
                 aria-checked={binauralOn}
+              >
+                <span className="settings-sheet__toggle-thumb" />
+              </button>
+            </div>
+
+            <div className="settings-sheet__row">
+              <span className="settings-sheet__label">Orb Audio</span>
+              <button
+                className={`settings-sheet__toggle ${
+                  synthOn ? 'settings-sheet__toggle--on' : ''
+                }`}
+                onClick={handleSynthToggle}
+                role="switch"
+                aria-checked={synthOn}
               >
                 <span className="settings-sheet__toggle-thumb" />
               </button>

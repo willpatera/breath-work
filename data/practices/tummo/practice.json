@@ -1,0 +1,26 @@
+{
+  "id": "tummo",
+  "title": "Tummo",
+  "author": "Tibetan",
+  "description": "Inner fire breathing. A Tibetan technique combining rapid breathing rounds with breath retention to generate internal heat and focused awareness.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Prepare",
+      "text": "Sit upright, relax shoulders.",
+      "duration": 10.0
+    },
+    {
+      "type": "repeat",
+      "label": "Fast breathing",
+      "rounds": 15,
+      "sequence": [
+        { "type": "inhale", "duration": 1.5 },
+        { "type": "exhale", "duration": 1.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 60.0, "cues": { "countdown": [10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 6.0 },
+    { "type": "hold_in", "duration": 15.0, "cues": { "countdown": [5, 3, 2, 1] } }
+  ]
+}

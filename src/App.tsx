@@ -9,6 +9,7 @@ import { PlayerOrb } from './components/PlayerOrb'
 import { PlayerControls } from './components/PlayerControls'
 import { SessionHeader } from './components/SessionHeader'
 import { InfoDrawer } from './components/InfoDrawer'
+import { IconClose } from './components/Icons'
 import './App.css'
 
 type Screen = 'library' | 'player'
@@ -16,15 +17,28 @@ type Screen = 'library' | 'player'
 export default function App() {
   const [screen, setScreen] = useState<Screen>('library')
   const [selectedPractice, setSelectedPractice] = useState<Practice | null>(null)
-  const [practices] = useState(() => loadPractices())
+  const [practices] = useState(() =>
+    loadPractices().sort((a, b) => a.title.localeCompare(b.title)),
+  )
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const filteredPractices = practices.filter((p) => {
+    if (!searchQuery.trim()) return true
+    const q = searchQuery.toLowerCase()
+    return (
+      p.title.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q)
+    )
+  })
 
   const status = usePlayerStore((s) => s.status)
   const load = usePlayerStore((s) => s.load)
   const reset = usePlayerStore((s) => s.reset)
 
-  // Initialize cues preference from localStorage
+  // Initialize audio preferences from localStorage
   useEffect(() => {
     audioEngine.setCuesEnabled(loadBool('cues', true))
+    audioEngine.setSynthEnabled(loadBool('synth', true))
   }, [])
 
   const handleSelect = (practice: Practice) => {
@@ -42,12 +56,17 @@ export default function App() {
   if (screen === 'library') {
     return (
       <div className="screen screen--library">
-        <header className="library-header">
-          <h1 className="library-header__title">Breath Work</h1>
-          <p className="library-header__subtitle">Choose a practice</p>
-        </header>
+        <div className="library-search">
+          <input
+            className="library-search__input"
+            type="text"
+            placeholder="Find your pattern"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
         <div className="practice-list">
-          {practices.map((p) => (
+          {filteredPractices.map((p) => (
             <PracticeCard key={p.id} practice={p} onSelect={handleSelect} />
           ))}
         </div>
@@ -72,12 +91,24 @@ export default function App() {
 
   return (
     <div className="screen screen--player">
-      {selectedPractice && (
-        <InfoDrawer practice={selectedPractice} />
-      )}
+      <div className="player-top-bar">
+        {selectedPractice && (
+          <InfoDrawer practice={selectedPractice} />
+        )}
+        <span className="player-top-bar__title">
+          {selectedPractice?.title}
+        </span>
+        <button
+          className="player-top-bar__close"
+          onClick={handleReturn}
+          aria-label="Back to library"
+        >
+          <IconClose size={20} />
+        </button>
+      </div>
       <SessionHeader />
       <PlayerOrb />
-      <PlayerControls onReturn={handleReturn} />
+      <PlayerControls />
     </div>
   )
 }

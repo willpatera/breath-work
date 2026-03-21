@@ -2,7 +2,6 @@ import { usePlayerStore } from '../features/player/playerController'
 import { formatTime, formatSeconds } from '../lib/format'
 
 export function SessionHeader() {
-  const title = usePlayerStore((s) => s.practiceTitle)
   const status = usePlayerStore((s) => s.status)
   const timeline = usePlayerStore((s) => s.timeline)
   const currentStepIndex = usePlayerStore((s) => s.currentStepIndex)
@@ -28,9 +27,11 @@ export function SessionHeader() {
 
   return (
     <div className="session-header">
-      <div className="session-header__title">{title}</div>
-
       <div className="session-header__phase">{step.phase}</div>
+
+      {step.text && (
+        <div className="session-header__text">{step.text}</div>
+      )}
 
       <div className="session-header__timer">
         {formatSeconds(stepRemaining)}
