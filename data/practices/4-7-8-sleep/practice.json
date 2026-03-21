@@ -1,0 +1,25 @@
+{
+  "id": "4-7-8-sleep",
+  "title": "4-7-8 Sleep",
+  "author": "Dr. Andrew Weil",
+  "description": "A calming technique for relaxation and sleep. Place the tip of your tongue against the ridge behind your upper front teeth. Inhale quietly through the nose, hold, then exhale audibly through the mouth.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Settle in",
+      "text": "Tongue behind upper front teeth. Breathe normally.",
+      "duration": 5.0,
+      "cues": { "countdown": [3, 2, 1] }
+    },
+    {
+      "type": "repeat",
+      "label": "4-7-8 cycle",
+      "rounds": 8,
+      "sequence": [
+        { "type": "inhale", "duration": 4.0 },
+        { "type": "hold_in", "duration": 7.0, "cues": { "countdown": [3, 2, 1] } },
+        { "type": "exhale", "duration": 8.0 }
+      ]
+    }
+  ]
+}
