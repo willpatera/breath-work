@@ -1,8 +1,8 @@
 {
-  "id": "progressive-co2-tolerance-50s",
-  "title": "Progressive CO2 Tolerance 50s",
+  "id": "progressive-co2-tolerance-40s",
+  "title": "Progressive CO2 Tolerance 40s",
   "author": "Will",
-  "description": "Build carbon dioxide tolerance through progressively shorter rest periods between breath holds. Steady nasal breathing rounds alternate with extended holds, where hold-in duration increases each block.",
+  "description": "Build carbon dioxide tolerance through progressively shorter rest periods between breath holds. Steady nasal breathing rounds alternate with extended holds, where hold-in duration increases each block. 40s hold out variant.",
   "steps": [
     {
       "type": "instruction",
@@ -21,9 +21,9 @@
         { "type": "exhale", "duration": 5.5 }
       ]
     },
-    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "hold_out", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
     { "type": "inhale", "duration": 8.0, "text": "Slowly" },
-    { "type": "hold_in", "duration": 20.0, "cues": { "countdown": [20, 10, 3, 2, 1] } },
+    { "type": "hold_in", "duration": 10.0, "cues": { "countdown": [10, 3, 2, 1] } },
     { "type": "exhale", "duration": 8.0 },
 
     {
@@ -35,9 +35,9 @@
         { "type": "exhale", "duration": 5.5 }
       ]
     },
-    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "hold_out", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
     { "type": "inhale", "duration": 8.0, "text": "Slowly" },
-    { "type": "hold_in", "duration": 30.0, "cues": { "countdown": [30, 10, 3, 2, 1] } },
+    { "type": "hold_in", "duration": 20.0, "cues": { "countdown": [20, 10, 3, 2, 1] } },
     { "type": "exhale", "duration": 8.0 },
 
     {
@@ -49,9 +49,9 @@
         { "type": "exhale", "duration": 5.5 }
       ]
     },
-    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "hold_out", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
     { "type": "inhale", "duration": 8.0, "text": "Slowly" },
-    { "type": "hold_in", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
+    { "type": "hold_in", "duration": 30.0, "cues": { "countdown": [30, 10, 3, 2, 1] } },
     { "type": "exhale", "duration": 8.0 },
 
     {
@@ -63,9 +63,9 @@
         { "type": "exhale", "duration": 5.5 }
       ]
     },
-    { "type": "hold_out", "duration": 60.0, "cues": { "countdown": [60, 10, 3, 2, 1] } },
+    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
     { "type": "inhale", "duration": 8.0, "text": "Slowly" },
-    { "type": "hold_in", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "hold_in", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
     { "type": "exhale", "duration": 8.0 },
 
     {
