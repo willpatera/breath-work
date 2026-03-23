@@ -5,18 +5,18 @@
  * Binaural mode: R channel fundamental offset by BINAURAL_OFFSET Hz
  * to create a perceived binaural beat (requires headphones).
  *
- * Inhale: linear frequency sweep 40 Hz → 400 Hz
- * Exhale: linear frequency sweep 400 Hz → 40 Hz
+ * Inhale: linear frequency sweep 35 Hz → 225 Hz
+ * Exhale: linear frequency sweep 225 Hz → 35 Hz
  *
  * Warm timbre: fundamental + 2nd harmonic (octave above at 12% volume)
  * routed through a lowpass filter (~800 Hz) to round off harshness.
- * Gentle 120ms attack, 150ms release.
+ * 0.5s fade-in from subtle volume, 0.5s fade-out to silence.
  */
 
-const FREQ_LOW = 40
-const FREQ_HIGH = 400
-const ATTACK_TIME = 0.12
-const RELEASE_TIME = 0.15
+const FREQ_LOW = 35
+const FREQ_HIGH = 225
+const ATTACK_TIME = 0.5
+const RELEASE_TIME = 0.5
 const VOLUME = 0.22
 const HARMONIC_VOLUME = 0.12
 const FILTER_FREQ = 800
@@ -173,10 +173,13 @@ function playSweep(
   panR.pan.setValueAtTime(1, now)
 
   // ── Master gain envelope ──
+  // Fade in from subtle volume (30%) over ATTACK_TIME,
+  // sustain at full, fade out over RELEASE_TIME to silence.
   const gain = ctx.createGain()
+  const subtleVolume = VOLUME * 0.6
   const attackEnd = now + Math.min(ATTACK_TIME, remaining * 0.5)
   gain.gain.cancelScheduledValues(now)
-  gain.gain.setValueAtTime(0, now)
+  gain.gain.setValueAtTime(subtleVolume, now)
   gain.gain.linearRampToValueAtTime(VOLUME, attackEnd)
   if (remaining > ATTACK_TIME + RELEASE_TIME) {
     gain.gain.setValueAtTime(VOLUME, now + remaining - RELEASE_TIME)
