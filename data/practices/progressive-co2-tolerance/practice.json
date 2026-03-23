@@ -1,0 +1,81 @@
+{
+  "id": "progressive-co2-tolerance",
+  "title": "Progressive CO2 Tolerance",
+  "author": "Open",
+  "description": "Build carbon dioxide tolerance through progressively shorter rest periods between breath holds. Steady nasal breathing rounds alternate with extended holds, where hold-in duration increases each block.",
+  "steps": [
+    {
+      "type": "instruction",
+      "label": "Settle in",
+      "text": "Breathe normally through your nose.",
+      "duration": 10.0,
+      "cues": { "countdown": [3, 2, 1] }
+    },
+
+    {
+      "type": "repeat",
+      "label": "Breathing round 1",
+      "rounds": 10,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 8.0, "text": "Slowly" },
+    { "type": "hold_in", "duration": 20.0, "cues": { "countdown": [20, 10, 3, 2, 1] } },
+    { "type": "exhale", "duration": 8.0 },
+
+    {
+      "type": "repeat",
+      "label": "Breathing round 2",
+      "rounds": 8,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 8.0, "text": "Slowly" },
+    { "type": "hold_in", "duration": 30.0, "cues": { "countdown": [30, 10, 3, 2, 1] } },
+    { "type": "exhale", "duration": 8.0 },
+
+    {
+      "type": "repeat",
+      "label": "Breathing round 3",
+      "rounds": 6,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 8.0, "text": "Slowly" },
+    { "type": "hold_in", "duration": 40.0, "cues": { "countdown": [40, 10, 3, 2, 1] } },
+    { "type": "exhale", "duration": 8.0 },
+
+    {
+      "type": "repeat",
+      "label": "Breathing round 4",
+      "rounds": 4,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    },
+    { "type": "hold_out", "duration": 60.0, "cues": { "countdown": [60, 10, 3, 2, 1] } },
+    { "type": "inhale", "duration": 8.0, "text": "Slowly" },
+    { "type": "hold_in", "duration": 50.0, "cues": { "countdown": [50, 10, 3, 2, 1] } },
+    { "type": "exhale", "duration": 8.0 },
+
+    {
+      "type": "repeat",
+      "label": "Closing — calm breaths",
+      "rounds": 6,
+      "sequence": [
+        { "type": "inhale", "duration": 5.5 },
+        { "type": "exhale", "duration": 5.5 }
+      ]
+    }
+  ]
+}
