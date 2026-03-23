@@ -360,6 +360,10 @@
   color: var(--text-secondary);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  max-width: calc(100% - 112px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .player-top-bar__close {

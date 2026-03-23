@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="g" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#64B7FA"/>
+      <stop offset="60%" stop-color="#F164E8"/>
+      <stop offset="100%" stop-color="#FEB8BA"/>
+    </radialGradient>
+  </defs>
+  <!-- Full bleed background for maskable icon -->
+  <rect width="512" height="512" fill="#000"/>
+  <!-- Orb sized within the 80% safe zone (408px), centered -->
+  <circle cx="256" cy="256" r="192" fill="url(#g)"/>
+</svg>
