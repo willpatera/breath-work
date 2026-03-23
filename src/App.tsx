@@ -10,6 +10,7 @@ import { PlayerControls } from './components/PlayerControls'
 import { SessionHeader } from './components/SessionHeader'
 import { InfoDrawer } from './components/InfoDrawer'
 import { IconClose } from './components/Icons'
+import { formatTime } from './lib/format'
 import './App.css'
 
 type Screen = 'library' | 'player'
@@ -32,6 +33,7 @@ export default function App() {
   })
 
   const status = usePlayerStore((s) => s.status)
+  const totalDuration = usePlayerStore((s) => s.totalDuration)
   const load = usePlayerStore((s) => s.load)
   const reset = usePlayerStore((s) => s.reset)
 
@@ -80,7 +82,19 @@ export default function App() {
       <div className="screen screen--complete">
         <div className="complete">
           <div className="complete__icon">✓</div>
-          <h1 className="complete__title">Practice Complete!</h1>
+          <h1 className="complete__title">Practice Complete</h1>
+
+          <div className="complete__stats">
+            <div className="complete__stat">
+              <span className="complete__stat-label">Practice</span>
+              <span className="complete__stat-value">{selectedPractice?.title}</span>
+            </div>
+            <div className="complete__stat">
+              <span className="complete__stat-label">Duration</span>
+              <span className="complete__stat-value">{formatTime(totalDuration)}</span>
+            </div>
+          </div>
+
           <button className="complete__btn" onClick={handleReturn}>
             Return to practice library
           </button>
