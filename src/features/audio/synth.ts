@@ -5,16 +5,16 @@
  * Binaural mode: R channel fundamental offset by BINAURAL_OFFSET Hz
  * to create a perceived binaural beat (requires headphones).
  *
- * Inhale: linear frequency sweep 35 Hz → 225 Hz
- * Exhale: linear frequency sweep 225 Hz → 35 Hz
+ * Inhale: linear frequency sweep 45 Hz → 290 Hz
+ * Exhale: linear frequency sweep 290 Hz → 45 Hz
  *
  * Warm timbre: fundamental + 2nd harmonic (octave above at 12% volume)
  * routed through a lowpass filter (~800 Hz) to round off harshness.
  * 0.5s fade-in from subtle volume, 0.5s fade-out to silence.
  */
 
-const FREQ_LOW = 35
-const FREQ_HIGH = 225
+import { synthConfig } from './synthConfig'
+
 const ATTACK_TIME = 0.5
 const RELEASE_TIME = 0.5
 const VOLUME = 0.22
@@ -33,7 +33,7 @@ export function playInhale(
   startOffset = 0,
   binaural = false,
 ): SynthHandle {
-  return playSweep(ctx, FREQ_LOW, FREQ_HIGH, duration, startOffset, binaural)
+  return playSweep(ctx, synthConfig.freqLow, synthConfig.freqHigh, duration, startOffset, binaural)
 }
 
 export function playExhale(
@@ -42,7 +42,7 @@ export function playExhale(
   startOffset = 0,
   binaural = false,
 ): SynthHandle {
-  return playSweep(ctx, FREQ_HIGH, FREQ_LOW, duration, startOffset, binaural)
+  return playSweep(ctx, synthConfig.freqHigh, synthConfig.freqLow, duration, startOffset, binaural)
 }
 
 /**

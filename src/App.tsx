@@ -9,6 +9,7 @@ import { PlayerOrb } from './components/PlayerOrb'
 import { PlayerControls } from './components/PlayerControls'
 import { SessionHeader } from './components/SessionHeader'
 import { InfoDrawer } from './components/InfoDrawer'
+import { DevPanel } from './components/DevPanel'
 import { IconClose } from './components/Icons'
 import { formatTime } from './lib/format'
 import './App.css'
@@ -123,6 +124,7 @@ export default function App() {
       <SessionHeader />
       <PlayerOrb />
       <PlayerControls />
+      {import.meta.env.DEV && <DevPanel />}
     </div>
   )
 }
